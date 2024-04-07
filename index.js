@@ -20,6 +20,7 @@ const game = (function () {
     const board = createBoard();
 
     let turn = '';
+    const getTurn = () => turn;
     // function to change turn or figure out who goes first
     const setTurn = () => {
         if (turn === playerOne.getName()) {
@@ -36,7 +37,7 @@ const game = (function () {
         }
     };
 
-    return { playerOne, playerTwo, board , setTurn};
+    return { playerOne, playerTwo, board , setTurn, getTurn};
 })();
 
 // create a board for the game
@@ -48,7 +49,10 @@ function createBoard () {
         ['','','']
     ];
     const getBoard = () => board;
-    const setTile = (x, y, value) => board[x][y] = value;
+    const setTile = (x, y, value) => {
+        board[x][y] = value;
+        game.setTurn();
+    };
 
     // function to check to see if someone won
     const checkWin = () => {
