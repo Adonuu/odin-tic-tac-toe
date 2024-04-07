@@ -139,7 +139,7 @@ function createSpace(x, y) {
                 }
             }
         });
-        // if board is full it is a tie
+        // if board and no won has won above it is a tie
         if (boardFull) {
             console.log('tie');
         }
@@ -156,5 +156,20 @@ function renderBoard() {
         }
     }
 }
+
+// function to set player name
+function setPlayerName( player, name) {
+    player.setName(name);
+}
+
+// add setPlayerName function to events on the input boxes for each player's name
+// this allows the user to change each player's name
+document.querySelector('#playerOneName').addEventListener('input', (e) => {
+    setPlayerName(game.playerOne, e.target.value);
+});
+
+document.querySelector('#playerTwoName').addEventListener('input', (e) => {
+    setPlayerName(game.playerTwo, e.target.value);
+});
 
 renderBoard();
