@@ -104,15 +104,42 @@ function createSpace(x, y) {
     newDiv.classList.add('space');
     // add function for setting the current value
     newDiv.addEventListener('click', () => {
+        let gameStatus;
         // check to see which players turn it is and set the text accordingly
         if (game.getTurn() === game.playerOne.getName()) {
             newDiv.innerHTML = game.playerOne.getPieces();
-            game.board.setTile(x, y, game.playerOne.getPieces());
+            gameStatus = game.board.setTile(x, y, game.playerOne.getPieces());
             newDiv.classList.add('clicked');
         } else if (game.getTurn() === game.playerTwo.getName()) {
             newDiv.innerHTML = game.playerTwo.getPieces();
-            game.board.setTile(x, y, game.playerTwo.getPieces());
+            gameStatus = game.board.setTile(x, y, game.playerTwo.getPieces());
             newDiv.classList.add('clicked');
+        }
+        // if gameStatus is not 0 then a player one
+        if (gameStatus != 0) {
+            if (gameStatus === game.playerOne.getPieces()) {
+                console.log('player one won');
+
+            } else if (gameStatus === game.playerTwo.getPieces()) {
+                console.log('player two won');
+            }
+            // give the rest of the buttons clicked class so they can't be clicked anymore
+            let boardChildren = document.querySelector('#board').childNodes;
+            boardChildren.forEach(element => {
+                element.classList.add('clicked');
+            });
+        };
+        // check to see if board is full
+        let boardFull = true;
+        let currentBoard = game.board.getBoard();
+        currentBoard.forEach(element => {
+            if (element != game.playerOne.getPieces() && element != game.playerTwo.getPieces()){
+                boardFull = false;
+            }
+        });
+        // if board is full it is a tie
+        if (boardFull) {
+            console.log('tie');
         }
     });
     parent.appendChild(newDiv);
