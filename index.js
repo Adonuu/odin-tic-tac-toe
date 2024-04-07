@@ -25,14 +25,26 @@ const game = (function () {
     const setTurn = () => {
         if (turn === playerOne.getName()) {
             turn = playerTwo.getName();
+            // add class to display which player's turn it is
+            document.querySelector('#playerTwoTurn').classList.toggle('turn');
+            // remove from current player
+            document.querySelector('#playerOneTurn').classList.toggle('turn');
         } else if (turn === playerTwo.getName()) {
             turn = playerOne.getName();
+            // add class to display which player's turn it is
+            document.querySelector('#playerOneTurn').classList.toggle('turn');
+            // remove from current player
+            document.querySelector('#playerTwoTurn').classList.toggle('turn');
         } else {
             let randomNumber = Math.round(Math.random() * 2);
             if (randomNumber === 1) {
                 turn = playerOne.getName();
+                // add class to display which player's turn it is
+            document.querySelector('#playerOneTurn').classList.toggle('turn');
             } else {
                 turn = playerTwo.getName();
+                // add class to display which player's turn it is
+                document.querySelector('#playerTwoTurn').classList.toggle('turn');
             }
         }
     };

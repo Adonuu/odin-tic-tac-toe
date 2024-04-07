@@ -13,9 +13,78 @@
 }
 
 .space:hover {
-    background-color: lightgray;
+    background-color: gray;
 }
 
 .clicked {
     pointer-events: none;
+}
+
+#header {
+    grid-area: header;
+    background-color: darkcyan;
+    font-size: 3rem;
+    padding-left: 5px;
+    color:white;
+}
+
+#settings {
+    grid-area: settings;
+}
+
+#settings > * {
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+#board {
+    margin: 10px;
+}
+
+#game {
+    grid-area: game;
+    display: grid;
+    grid-template-rows: 4fr 1fr;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: lightgrey;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-areas: 
+    "header"
+    "settings"
+    "game";
+}
+
+.player {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.player > * {
+    margin-left: 20px;
+}
+
+.turn {
+    background-color: darkcyan;
+}
+
+#playerOneTurn {
+    font-size: 1.5rem;
+    padding: 5px;
+}
+
+#playerTwoTurn {
+    font-size: 1.5rem;
+    padding: 5px;
+}
+
+#restartGame {
+    font-size: 1.5rem;
+    margin-left: 100px;
+    margin-right: 100px;
 }
