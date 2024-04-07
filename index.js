@@ -170,26 +170,25 @@ function createSpace(x, y) {
                 boardChildren.forEach(element => {
                     element.classList.add('clicked');
                 });
-            };
-            // check to see if board is full
-            let boardFull = true;
-            let currentBoard = game.board.getBoard();
-            currentBoard.forEach(element => {
-                for (let i = 0; i < element.length - 1; i ++) {
-                    if (element[i] != game.playerOne.getPieces() && element[i] != game.playerTwo.getPieces()){
-                        boardFull = false;
+            } else {
+                // check to see if board is full
+                let boardFull = true;
+                let currentBoard = game.board.getBoard();
+                currentBoard.forEach(element => {
+                    for (let i = 0; i < 3; i ++) {
+                        if (element[i] != game.playerOne.getPieces() && element[i] != game.playerTwo.getPieces()){
+                            boardFull = false;
+                        }
                     }
+                });
+                if (boardFull) {
+                    alert('Tie!');
                 }
-            });
-            // if board and no won has won above it is a tie
-            if (boardFull) {
-                alert('Tie!');
             }
         }, 500);
-
     });
     parent.appendChild(newDiv);
-};
+}
 
 // render elements to click to set value
 // create a 3 x 3 grid

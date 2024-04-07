@@ -71,6 +71,7 @@ body {
 
 .turn {
     background-color: darkcyan;
+    border-radius: 7px;
 }
 
 #playerOneTurn {
