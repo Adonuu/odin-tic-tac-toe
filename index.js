@@ -13,8 +13,8 @@ function createPlayer(name, pieces) {
 // also will keep track of player turn
 const game = (function () {
     // instantiate two players
-    const playerOne = createPlayer('', 'X');
-    const playerTwo = createPlayer('', 'O');
+    const playerOne = createPlayer('One', 'X');
+    const playerTwo = createPlayer('Two', 'O');
 
     // instantiate board
     const board = createBoard();
@@ -37,6 +37,9 @@ const game = (function () {
         }
     };
 
+    // run set turn once to setup first players turn
+    setTurn();
+
     return { playerOne, playerTwo, board , setTurn, getTurn};
 })();
 
@@ -52,6 +55,7 @@ function createBoard () {
     const setTile = (x, y, value) => {
         board[x][y] = value;
         game.setTurn();
+        return checkWin();
     };
 
     // function to check to see if someone won
@@ -83,9 +87,45 @@ function createBoard () {
             return valueToCheck;
         }
         // if we made it through checking the board return 0
-        // this states no one won
+        // this states no one won/tie
         return 0;
     };
 
     return {getBoard, setTile, checkWin};
 }
+
+// create element for an individual space on the grid
+function createSpace(x, y) {
+    // find parent container to append to
+    let parent = document.querySelector('#board');
+    // x and y used to know which space on the board the space is linked too
+    let newDiv = document.createElement('button');
+    // add class for styling
+    newDiv.classList.add('space');
+    // add function for setting the current value
+    newDiv.addEventListener('click', () => {
+        // check to see which players turn it is and set the text accordingly
+        if (game.getTurn() === game.playerOne.getName()) {
+            newDiv.innerHTML = game.playerOne.getPieces();
+            game.board.setTile(x, y, game.playerOne.getPieces());
+            newDiv.classList.add('clicked');
+        } else if (game.getTurn() === game.playerTwo.getName()) {
+            newDiv.innerHTML = game.playerTwo.getPieces();
+            game.board.setTile(x, y, game.playerTwo.getPieces());
+            newDiv.classList.add('clicked');
+        }
+    });
+    parent.appendChild(newDiv);
+};
+
+// render elements to click to set value
+// create a 3 x 3 grid
+function renderBoard() {
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            createSpace(i, j);
+        }
+    }
+}
+
+renderBoard();

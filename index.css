@@ -1,0 +1,21 @@
+#board {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    background-color: black;
+}
+
+.space {
+    height: 50px;
+    border: none;
+    text-align: center;
+    font-size: 2em;
+}
+
+.space:hover {
+    background-color: lightgray;
+}
+
+.clicked {
+    pointer-events: none;
+}
