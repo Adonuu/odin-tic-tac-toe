@@ -133,8 +133,10 @@ function createSpace(x, y) {
         let boardFull = true;
         let currentBoard = game.board.getBoard();
         currentBoard.forEach(element => {
-            if (element != game.playerOne.getPieces() && element != game.playerTwo.getPieces()){
-                boardFull = false;
+            for (let i = 0; i < element.length - 1; i ++) {
+                if (element[i] != game.playerOne.getPieces() && element[i] != game.playerTwo.getPieces()){
+                    boardFull = false;
+                }
             }
         });
         // if board is full it is a tie
